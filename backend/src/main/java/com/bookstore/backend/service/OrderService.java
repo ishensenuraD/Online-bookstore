@@ -1,0 +1,83 @@
+package com.bookstore.backend.service;
+
+import com.bookstore.backend.model.Book;
+import com.bookstore.backend.model.Order;
+import com.bookstore.backend.model.Order.OrderItem;
+import com.bookstore.backend.repository.BookRepository;
+import com.bookstore.backend.repository.OrderRepository;
+import com.bookstore.backend.repository.UserRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class OrderService {
+
+    @Autowired
+    private OrderRepository orderRepository;
+
+    @Autowired
+    private BookRepository bookRepository; // Needed to check price and stock
+
+    @Autowired
+    private UserRepository userRepository; // Needed to validate user ID
+
+    // 1. PLACE ORDER (Checkout Process - 1.iii)
+    public Order placeOrder(Order order) {
+
+        // 1. Validate User ID
+        if (!userRepository.existsById(order.getUserId())) {
+            throw new IllegalArgumentException("User ID is invalid or user does not exist.");
+        }
+
+        double calculatedTotal = 0;
+
+        // 2. Iterate through ordered items to validate price and stock
+        for (OrderItem item : order.getItems()) {
+            Optional<Book> bookOptional = bookRepository.findById(item.getBook_id());
+
+            if (bookOptional.isEmpty()) {
+                throw new IllegalArgumentException("Book with ID " + item.getBook_id() + " not found.");
+            }
+
+            Book book = bookOptional.get();
+
+            // 3. Price Validation: Use the current price from the database, not the
+            // client's price (Security)
+            item.setPrice(book.getPrice());
+
+            // 4. Stock Check
+            if (book.getStockQuantity() < item.getQuantity()) {
+                throw new IllegalArgumentException(
+                        "Insufficient stock for book: " + book.getTitle() +
+                                ". Available: " + book.getStockQuantity());
+            }
+
+            // 5. Update Stock
+            book.setStockQuantity(book.getStockQuantity() - item.getQuantity());
+            bookRepository.save(book);
+
+            // 6. Calculate Total
+            calculatedTotal += item.getPrice() * item.getQuantity();
+        }
+
+        // 7. Finalize Order and Save
+        order.setTotalAmount(calculatedTotal);
+
+        // Order status and date are set in the Order model constructor
+        return orderRepository.save(order);
+    }
+
+    // 2. READ ALL (Admin Panel - View All Orders)
+    public List<Order> findAll() {
+        return orderRepository.findAll();
+    }
+
+    // 3. READ BY USER ID (User History - 1.v)
+    public List<Order> findByUserId(String user_id) {
+        return orderRepository.findByUserId(user_id);
+    }
+}
