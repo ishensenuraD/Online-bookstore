@@ -1,0 +1,81 @@
+.home-container {
+  min-height: calc(100vh - 70px);
+}
+
+.hero-section {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 120px 20px;
+  text-align: center;
+}
+
+.hero-section h1 {
+  font-size: 56px;
+  margin: 0 0 16px 0;
+  font-weight: 700;
+}
+
+.hero-subtitle {
+  font-size: 24px;
+  margin: 0 0 40px 0;
+  opacity: 0.9;
+}
+
+.btn-hero {
+  display: inline-block;
+  padding: 16px 40px;
+  background: white;
+  color: #667eea;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 600;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-hero:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.features-section {
+  max-width: 1200px;
+  margin: 80px auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 40px;
+}
+
+.feature {
+  text-align: center;
+  padding: 40px 20px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.feature:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+.feature-icon {
+  font-size: 64px;
+  margin-bottom: 20px;
+}
+
+.feature h3 {
+  font-size: 24px;
+  color: #333;
+  margin: 0 0 12px 0;
+  font-weight: 600;
+}
+
+.feature p {
+  color: #666;
+  margin: 0;
+  font-size: 16px;
+}
+
