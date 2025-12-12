@@ -1,7 +1,9 @@
 package com.bookstore.backend.controller;
 
+import com.bookstore.backend.dto.LoginResponse;
 import com.bookstore.backend.model.User;
 import com.bookstore.backend.service.UserService;
+import com.bookstore.backend.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,9 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private JwtUtil jwtUtil;
+
     // 1. REGISTRATION (User Registration - 1.i)
     @PostMapping("/register")
     public ResponseEntity<User> registerUser(@RequestBody User user) {
@@ -26,14 +31,24 @@ public class UserController {
         }
     }
 
-    // 6. LOGIN (User Login - 1.ii) // <-- NEW ENDPOINT
+    // 6. LOGIN (User Login - 1.ii) // <-- UPDATED TO RETURN JWT TOKEN
     @PostMapping("/login")
-    public ResponseEntity<User> loginUser(@RequestBody User userDetails) {
+    public ResponseEntity<LoginResponse> loginUser(@RequestBody User userDetails) {
         String email = userDetails.getEmail();
         String password = userDetails.getPassword();
 
         return userService.authenticate(email, password)
-                .map(user -> ResponseEntity.ok(user)) // 200 OK on success
+                .map(user -> {
+                    String token = jwtUtil.generateToken(user.getEmail(), user.getUser_id(), user.getRole());
+                    LoginResponse loginResponse = new LoginResponse(
+                            token,
+                            user.getUser_id(),
+                            user.getEmail(),
+                            user.getName(),
+                            user.getRole()
+                    );
+                    return ResponseEntity.ok(loginResponse);
+                })
                 .orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build()); // 401 Unauthorized on failure
     }
 
