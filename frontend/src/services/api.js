@@ -87,6 +87,17 @@ export const ordersAPI = {
   update: (id, order) => api.put(`/orders/${id}`, order),
   delete: (id) => api.delete(`/orders/${id}`),
   getByUserId: (userId) => api.get(`/orders/history/${userId}`),
+  updateStatus: (id, status) => api.put(`/orders/${id}/status`, { status }),
+};
+
+// Users API
+export const usersAPI = {
+  getCurrentUser: () => api.get('/users/me'),
+  getAll: () => api.get('/users'),
+  getById: (id) => api.get(`/users/${id}`),
+  updateProfile: (id, userData) => api.put(`/users/${id}`, userData),
+  changePassword: (id, passwordData) => api.put(`/users/${id}/change-password`, passwordData),
+  delete: (id) => api.delete(`/users/${id}`),
 };
 
 export default api;

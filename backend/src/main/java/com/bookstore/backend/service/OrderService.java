@@ -80,4 +80,36 @@ public class OrderService {
     public List<Order> findByUserId(String user_id) {
         return orderRepository.findByUserId(user_id);
     }
+
+    // 4. READ ONE
+    public Optional<Order> findById(String id) {
+        return orderRepository.findById(id);
+    }
+
+    // 5. UPDATE ORDER STATUS
+    public Order updateStatus(String id, String status) {
+        Optional<Order> orderOptional = orderRepository.findById(id);
+        
+        if (orderOptional.isEmpty()) {
+            throw new RuntimeException("Order not found with id: " + id);
+        }
+        
+        // Validate status
+        String[] validStatuses = {"PENDING", "PROCESSING", "SHIPPED", "DELIVERED", "CANCELLED"};
+        boolean isValid = false;
+        for (String validStatus : validStatuses) {
+            if (validStatus.equals(status)) {
+                isValid = true;
+                break;
+            }
+        }
+        
+        if (!isValid) {
+            throw new IllegalArgumentException("Invalid status. Must be one of: PENDING, PROCESSING, SHIPPED, DELIVERED, CANCELLED");
+        }
+        
+        Order order = orderOptional.get();
+        order.setStatus(status);
+        return orderRepository.save(order);
+    }
 }

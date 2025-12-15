@@ -93,10 +93,17 @@
 
 .book-genre {
   color: #999;
-  margin: 0 0 16px 0;
+  margin: 0 0 8px 0;
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+}
+
+.book-rating {
+  color: #ff9800;
+  margin: 0 0 16px 0;
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .book-footer {
@@ -139,5 +146,87 @@
 
 .error {
   color: #f44336;
+}
+
+.search-section {
+  margin-bottom: 20px;
+}
+
+.filters-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: flex-end;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  margin-top: 20px;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 150px;
+}
+
+.filter-group label {
+  font-weight: 600;
+  color: #333;
+  font-size: 14px;
+}
+
+.filter-select {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  background: white;
+  cursor: pointer;
+}
+
+.price-inputs {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.price-input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  width: 100px;
+}
+
+.clear-filters-btn {
+  padding: 10px 20px;
+  background: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background 0.3s;
+  align-self: flex-end;
+}
+
+.clear-filters-btn:hover {
+  background: #5a6268;
+}
+
+@media (max-width: 768px) {
+  .filters-section {
+    flex-direction: column;
+  }
+  
+  .filter-group {
+    width: 100%;
+  }
+  
+  .clear-filters-btn {
+    width: 100%;
+  }
 }
 

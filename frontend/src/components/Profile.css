@@ -1,0 +1,183 @@
+.profile-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.profile-card {
+  background: white;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.profile-card h2 {
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.profile-view {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.profile-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.profile-field label {
+  font-weight: 600;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.profile-field p {
+  color: #333;
+  font-size: 1rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.profile-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn-secondary-link {
+  padding: 0.75rem 1.5rem;
+  border: 1px solid #6c757d;
+  border-radius: 4px;
+  font-size: 1rem;
+  text-decoration: none;
+  color: #6c757d;
+  background-color: white;
+  transition: all 0.3s;
+  display: inline-block;
+  text-align: center;
+}
+
+.btn-secondary-link:hover {
+  background-color: #6c757d;
+  color: white;
+}
+
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: #333;
+}
+
+.form-group input {
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.form-group input.disabled-input {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+}
+
+.form-group small {
+  color: #666;
+  font-size: 0.85rem;
+}
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.btn-primary,
+.btn-secondary {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+}
+
+.error-message {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.success-message {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.loading {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+}
+
+@media (max-width: 768px) {
+  .profile-container {
+    margin: 1rem;
+  }
+  
+  .profile-card {
+    padding: 1.5rem;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+  }
+  
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+  }
+}
+

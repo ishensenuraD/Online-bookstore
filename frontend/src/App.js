@@ -10,6 +10,9 @@ import BookList from './components/BookList';
 import BookDetail from './components/BookDetail';
 import Cart from './components/Cart';
 import Orders from './components/Orders';
+import Profile from './components/Profile';
+import PasswordChange from './components/PasswordChange';
+import AdminPanel from './components/AdminPanel';
 import './App.css';
 
 const PrivateRoute = ({ children }) => {
@@ -49,6 +52,30 @@ function App() {
                   element={
                     <PrivateRoute>
                       <Orders />
+                    </PrivateRoute>
+                  }
+                />
+                <Route
+                  path="/profile"
+                  element={
+                    <PrivateRoute>
+                      <Profile />
+                    </PrivateRoute>
+                  }
+                />
+                <Route
+                  path="/change-password"
+                  element={
+                    <PrivateRoute>
+                      <PasswordChange />
+                    </PrivateRoute>
+                  }
+                />
+                <Route
+                  path="/admin"
+                  element={
+                    <PrivateRoute>
+                      <AdminPanel />
                     </PrivateRoute>
                   }
                 />

@@ -46,4 +46,26 @@ public class OrderController {
         }
         return ResponseEntity.ok(orders);
     }
+
+    // 4. UPDATE ORDER STATUS (Admin only)
+    @PutMapping("/{id}/status")
+    public ResponseEntity<?> updateOrderStatus(
+            @PathVariable String id,
+            @RequestBody com.bookstore.backend.dto.OrderStatusUpdateRequest request) throws IllegalArgumentException {
+        try {
+            Order updatedOrder = orderService.updateStatus(id, request.getStatus());
+            return ResponseEntity.ok(updatedOrder);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(java.util.Map.of("message", e.getMessage()));
+        }
+    }
+
+    // 5. GET ORDER BY ID
+    @GetMapping("/{id}")
+    public ResponseEntity<Order> getOrderById(@PathVariable String id) {
+        return orderService.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
 }

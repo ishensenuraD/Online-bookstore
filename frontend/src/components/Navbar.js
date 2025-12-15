@@ -30,6 +30,10 @@ const Navbar = () => {
                 Cart ({getTotalItems()})
               </Link>
               <Link to="/orders" className="navbar-link">Orders</Link>
+              <Link to="/profile" className="navbar-link">Profile</Link>
+              {user.role === 'ADMIN' && (
+                <Link to="/admin" className="navbar-link">Admin</Link>
+              )}
               <div className="navbar-user">
                 <span>Hello, {user.name}</span>
                 <button onClick={handleLogout} className="btn-logout">
