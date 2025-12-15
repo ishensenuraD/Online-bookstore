@@ -18,8 +18,10 @@ public class CorsConfig {
         // Allow credentials
         configuration.setAllowCredentials(true);
         
-        // Allow all origins (for development) - change to specific origin in production
-        configuration.addAllowedOriginPattern("*");
+        // Allow specific origins (required when credentials are enabled)
+        // For development: allow localhost:3000 (React dev server)
+        configuration.addAllowedOrigin("http://localhost:3000");
+        configuration.addAllowedOrigin("http://127.0.0.1:3000");
         
         // Allow all headers
         configuration.addAllowedHeader("*");

@@ -24,4 +24,5 @@ public class Book {
     private int stockQuantity; // stock_quantity
     private String coverImageUrl; // cover_image_url
     private LocalDate publishedDate; // published_date
+    private Double rating; // Average rating (0.0 to 5.0)
 }

@@ -1,0 +1,104 @@
+.admin-order-management {
+  width: 100%;
+}
+
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.order-card {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 1.5rem;
+  border-left: 4px solid #2196f3;
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.order-header h3 {
+  margin: 0 0 0.5rem 0;
+  color: #333;
+}
+
+.order-date,
+.order-user {
+  color: #666;
+  font-size: 0.9rem;
+  margin: 0.25rem 0;
+}
+
+.order-status-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-end;
+}
+
+.status-badge {
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  color: white;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.status-select {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.order-items {
+  margin: 1rem 0;
+}
+
+.order-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.order-item:last-child {
+  border-bottom: none;
+}
+
+.order-item-info h4 {
+  margin: 0 0 0.25rem 0;
+  color: #333;
+}
+
+.order-item-info p {
+  margin: 0;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.order-item-total {
+  font-weight: 600;
+  color: #333;
+}
+
+.order-footer {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 2px solid #ddd;
+}
+
+.order-total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #333;
+}
+

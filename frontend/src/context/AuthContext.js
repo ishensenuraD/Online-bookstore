@@ -35,9 +35,13 @@ export const AuthProvider = ({ children }) => {
       setUser(userData);
       return { success: true };
     } catch (error) {
+      console.error('Login error:', error);
+      const errorMessage = error.response?.data?.message 
+        || error.message 
+        || (error.response?.status === 401 ? 'Invalid email or password' : 'Login failed. Please try again.');
       return { 
         success: false, 
-        error: error.response?.data?.message || 'Login failed' 
+        error: errorMessage
       };
     }
   };
