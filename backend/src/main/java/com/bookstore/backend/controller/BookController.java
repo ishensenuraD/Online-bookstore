@@ -40,15 +40,15 @@ public class BookController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    // 4. UPDATE (Fixed catch order)
+    // 4. UPDATE
     @PutMapping("/{id}")
     public ResponseEntity<Book> updateBook(@PathVariable String id, @RequestBody Book bookDetails) {
         try {
             Book updatedBook = bookService.update(id, bookDetails);
             return ResponseEntity.ok(updatedBook);
-        } catch (IllegalArgumentException e) { // <-- CATCH SPECIFIC (validation) FIRST
+        } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        } catch (RuntimeException e) { // <-- CATCH GENERAL (not found) SECOND
+        } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
         }
     }

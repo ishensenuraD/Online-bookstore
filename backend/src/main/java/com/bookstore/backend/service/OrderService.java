@@ -25,7 +25,6 @@ public class OrderService {
     @Autowired
     private UserRepository userRepository; // Needed to validate user ID
 
-    // 1. PLACE ORDER (Checkout Process - 1.iii)
     public Order placeOrder(Order order) {
 
         // 1. Validate User ID
@@ -35,7 +34,6 @@ public class OrderService {
 
         double calculatedTotal = 0;
 
-        // 2. Iterate through ordered items to validate price and stock
         for (OrderItem item : order.getItems()) {
             Optional<Book> bookOptional = bookRepository.findById(item.getBook_id());
 
@@ -45,8 +43,6 @@ public class OrderService {
 
             Book book = bookOptional.get();
 
-            // 3. Price Validation: Use the current price from the database, not the
-            // client's price (Security)
             item.setPrice(book.getPrice());
 
             // 4. Stock Check
@@ -71,12 +67,12 @@ public class OrderService {
         return orderRepository.save(order);
     }
 
-    // 2. READ ALL (Admin Panel - View All Orders)
+    // 2. READ ALL
     public List<Order> findAll() {
         return orderRepository.findAll();
     }
 
-    // 3. READ BY USER ID (User History - 1.v)
+    // 3. READ BY USER ID
     public List<Order> findByUserId(String user_id) {
         return orderRepository.findByUserId(user_id);
     }
@@ -89,13 +85,13 @@ public class OrderService {
     // 5. UPDATE ORDER STATUS
     public Order updateStatus(String id, String status) {
         Optional<Order> orderOptional = orderRepository.findById(id);
-        
+
         if (orderOptional.isEmpty()) {
             throw new RuntimeException("Order not found with id: " + id);
         }
-        
+
         // Validate status
-        String[] validStatuses = {"PENDING", "PROCESSING", "SHIPPED", "DELIVERED", "CANCELLED"};
+        String[] validStatuses = { "PENDING", "PROCESSING", "SHIPPED", "DELIVERED", "CANCELLED" };
         boolean isValid = false;
         for (String validStatus : validStatuses) {
             if (validStatus.equals(status)) {
@@ -103,11 +99,12 @@ public class OrderService {
                 break;
             }
         }
-        
+
         if (!isValid) {
-            throw new IllegalArgumentException("Invalid status. Must be one of: PENDING, PROCESSING, SHIPPED, DELIVERED, CANCELLED");
+            throw new IllegalArgumentException(
+                    "Invalid status. Must be one of: PENDING, PROCESSING, SHIPPED, DELIVERED, CANCELLED");
         }
-        
+
         Order order = orderOptional.get();
         order.setStatus(status);
         return orderRepository.save(order);

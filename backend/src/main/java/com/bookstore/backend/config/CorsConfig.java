@@ -14,27 +14,24 @@ public class CorsConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        
+
         // Allow credentials
         configuration.setAllowCredentials(true);
-        
-        // Allow specific origins (required when credentials are enabled)
-        // For development: allow localhost:3000 (React dev server)
+
         configuration.addAllowedOrigin("http://localhost:3000");
         configuration.addAllowedOrigin("http://127.0.0.1:3000");
-        
+
         // Allow all headers
         configuration.addAllowedHeader("*");
-        
+
         // Allow all methods
         configuration.addAllowedMethod("*");
-        
+
         // Expose Authorization header
         configuration.setExposedHeaders(Arrays.asList("Authorization"));
-        
+
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
 }
-

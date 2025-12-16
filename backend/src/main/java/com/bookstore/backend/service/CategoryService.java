@@ -11,21 +11,19 @@ import java.util.Optional;
 @Service
 public class CategoryService {
 
-    // Inject the CategoryRepository to communicate with the database
     @Autowired
     private CategoryRepository categoryRepository;
 
-    // CREATE / SAVE (Admin Panel: Add Category)
+    // CREATE / SAVE
     public Category save(Category category) {
-        // Business Logic Example: Ensure the category name is not null/empty before
-        // saving
+
         if (category.getName() == null || category.getName().trim().isEmpty()) {
             throw new IllegalArgumentException("Category name cannot be empty.");
         }
         return categoryRepository.save(category);
     }
 
-    // READ ALL (Admin Panel & Book Filtering)
+    // READ ALL
     public List<Category> findAll() {
         return categoryRepository.findAll();
     }
@@ -35,7 +33,7 @@ public class CategoryService {
         return categoryRepository.findById(id);
     }
 
-    // UPDATE (Admin Panel: Edit Category)
+    // UPDATE
     public Category update(String id, Category categoryDetails) {
         Optional<Category> categoryOptional = categoryRepository.findById(id);
 
@@ -55,7 +53,7 @@ public class CategoryService {
         }
     }
 
-    // DELETE (Admin Panel: Delete Category)
+    // DELETE
     public void delete(String id) {
         categoryRepository.deleteById(id);
     }

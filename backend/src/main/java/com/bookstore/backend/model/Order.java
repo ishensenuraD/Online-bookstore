@@ -12,8 +12,8 @@ public class Order {
 
     @Id
     private String order_id;
-    private String userId; // Links to the customer who placed the order <-- RENAME HERE
-    private List<OrderItem> items; // List of books and their quantities/prices
+    private String userId;
+    private List<OrderItem> items; // inner class eken enne me object eka
     private double totalAmount;
     private String status; // e.g., "PENDING", "PROCESSING", "SHIPPED", "DELIVERED", "CANCELLED"
     private LocalDateTime orderDate;

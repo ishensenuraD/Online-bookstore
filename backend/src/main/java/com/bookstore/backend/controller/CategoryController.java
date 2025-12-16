@@ -40,7 +40,7 @@ public class CategoryController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    // 4. UPDATE (Fixed catch order)
+    // 4. UPDATE
     @PutMapping("/{id}")
     public ResponseEntity<Category> updateCategory(@PathVariable String id, @RequestBody Category categoryDetails) {
         try {

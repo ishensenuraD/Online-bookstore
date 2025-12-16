@@ -15,28 +15,27 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-    // 1. PLACE ORDER (Checkout Process - 1.iii)
+    // 1. PLACE ORDER
     // POST: http://localhost:8081/api/orders
     @PostMapping
     public ResponseEntity<Order> placeOrder(@RequestBody Order order) {
         try {
             Order newOrder = orderService.placeOrder(order);
-            return new ResponseEntity<>(newOrder, HttpStatus.CREATED); // 201 Created
+            return new ResponseEntity<>(newOrder, HttpStatus.CREATED);
         } catch (IllegalArgumentException e) {
-            // Catches validation errors like invalid user ID, book not found, or
-            // insufficient stock.
+
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
     }
 
-    // 2. READ ALL ORDERS (Admin Panel)
+    // 2.
     // GET: http://localhost:8081/api/orders
     @GetMapping
     public List<Order> getAllOrders() {
         return orderService.findAll();
     }
 
-    // 3. READ ORDER HISTORY BY USER (User History - 1.v)
+    // 3. READ ORDER HISTORY BY USER
     // GET: http://localhost:8081/api/orders/history/{user_id}
     @GetMapping("/history/{userId}")
     public ResponseEntity<List<Order>> getOrderHistory(@PathVariable String userId) {
